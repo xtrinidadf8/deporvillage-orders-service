@@ -1,0 +1,23 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        types:
+            client_id:  App\Infrastructure\Persistence\Doctrine\Client\Type\ClientIdType
+            order_id:   App\Infrastructure\Persistence\Doctrine\Order\Type\OrderIdType
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            Client:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Doctrine/Client/Mapping'
+                prefix: 'App\Domain\Client'
+                alias: Client
+            Order:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Doctrine/Order/Mapping'
+                prefix: 'App\Domain\Order'
+                alias: Order

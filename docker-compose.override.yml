@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+    php-fpm:
+        build:
+            context: .
+            dockerfile: ./docker/php-7.4-fpm/dev/Dockerfile
+            args:
+                - "HOST_IP=${DOCKER_HOST_IP}"
+        volumes:
+            - "./:/opt/app"
+        depends_on:
+            - postgres
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/nginx-1.19/dev/Dockerfile
+        volumes:
+            - "./:/opt/app"
+        depends_on:
+            - php-fpm
+        ports:
+            - '8081:8081'
+
+    postgres:
+        container_name: postgres
+        image: postgres:alpine
+        restart: always
+        environment:
+            POSTGRES_DATABASE: orderService
+            POSTGRES_USER: orderService
+            POSTGRES_PASSWORD: orderService
+        ports:
+            - 5432:5432

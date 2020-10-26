@@ -1,0 +1,9 @@
+create_order_post_controller:
+    path: /order
+    methods: [ POST ]
+    controller: App\Infrastructure\UI\Http\Order\CreateOrderPostController::execute
+
+health_check:
+    path: /health
+    methods: [ GET ]
+    controller: App\Infrastructure\UI\Http\HealthCheck\GetHealthCheckController::execute

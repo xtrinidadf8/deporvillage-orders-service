@@ -1,0 +1,21 @@
+# Codeception Test Suite Configuration
+#
+# Suite for functional tests
+# Emulate web requests and make application process them
+
+actor: FunctionalTester
+modules:
+    enabled:
+        -   Symfony:
+                app_path: 'src'
+                environment: 'test'
+                kernel_class: 'App\Kernel'
+                rebootable_client: true
+        -   Doctrine2:
+                depends: Symfony
+                cleanup: true
+        -   REST:
+                url: /
+                depends: Symfony
+        - Asserts
+        - \Tests\Helper\Functional

@@ -1,0 +1,3 @@
+App\Infrastructure\UI\Http\Order\Request\CreateOrderRequest:
+    properties:
+
